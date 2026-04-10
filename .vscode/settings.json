@@ -1,5 +1,13 @@
 {
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
   "editor.formatOnSave": false,
+
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
 
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
@@ -11,11 +19,5 @@
     "vue"
   ],
 
-  "eslint.run": "onSave",
-
-  "files.insertFinalNewline": true,
-  "files.trimTrailingWhitespace": true,
-
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true
+  "eslint.run": "onSave"
 }

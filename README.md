@@ -1,75 +1,56 @@
-# Nuxt Minimal Starter
+# Transcendence
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Build dependencies
+- Node.js v24+
+- npm
+- Docker and Docker Compose
+- Git
 
-## Setup
+## Node modules used
+- nuxt
+- @nuxt/eslint
+- drizzle-orm
+- drizzle-kit
+- zod
 
-Make sure to install dependencies:
+## Initial dev setup
 
 ```bash
-# npm
+# 1. Copy the environment file
+cp .env.example .env
+
+# 2. Install all dependencies
 npm install
 
-# pnpm
-pnpm install
+# 3. Start the Postgres container
+docker compose up -d
 
-# yarn
-yarn install
+# 4. Push the schema to the newly created database
+npm run db:push
 
-# bun
-bun install
+# 5. Populate the database with some test data
+npm run db:seed
+
+# 6. Start the server
+npm run dev
 ```
 
-## Development Server
+Eventually, the goal will be to deploy everyhing with a single command but I think it's best to start simple before getting into any premature refactoring.
 
-Start the development server on `http://localhost:3000`:
+## Available dev commands
 
 ```bash
-# npm
+# Start dev server (main command)
 npm run dev
 
-# pnpm
-pnpm dev
+# Check code style
+npm run lint
+npm run lint:fix
 
-# yarn
-yarn dev
+# Database operations
+npm run db:push
+npm run db:seed
 
-# bun
-bun run dev
+# Start Drizzle Studio
+npx drizzle-kit studio
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
