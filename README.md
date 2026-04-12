@@ -35,7 +35,7 @@ npm run db:seed
 npm run dev
 ```
 
-Eventually, the goal will be to deploy everyhing with a single command but I think it's best to start simple before getting into any premature refactoring.
+Eventually, the goal will be to deploy everything with a single command but I think it's best to start simple before getting into any premature refactoring.
 
 ## Available dev commands
 
