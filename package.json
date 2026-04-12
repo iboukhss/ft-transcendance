@@ -11,15 +11,14 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-
     "db:push": "drizzle-kit push",
     "db:seed": "npx tsx server/database/seed.ts"
   },
   "dependencies": {
     "@nuxt/eslint": "^1.15.2",
+    "bcrypt-ts": "^8.0.1",
     "drizzle-orm": "^0.45.2",
     "nuxt": "^4.4.2",
     "postgres": "^3.4.9",
