@@ -5,6 +5,10 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
 
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+
   "editor.formatOnSave": false,
 
   "js/ts.tsdk.path": "node_modules/typescript/lib",
