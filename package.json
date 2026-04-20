@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "db:push": "drizzle-kit push",
-    "db:seed": "npx tsx server/database/seed.ts"
+    "db:seed": "npx tsx server/database/seed.ts",
+    "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
     "@nuxt/eslint": "^1.15.2",

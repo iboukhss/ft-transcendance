@@ -10,8 +10,10 @@
 - nuxt
 - @nuxt/eslint
 - drizzle-orm
-- drizzle-kit
 - zod
+- nuxt-auth-utils
+- @nuxt/ui
+- tailwindcss
 
 ## Initial dev setup
 

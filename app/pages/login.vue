@@ -1,9 +1,55 @@
 <script setup lang="ts">
+import { z } from 'zod'
+import type { FormSubmitEvent } from '@nuxt/ui'
+
+const schema = z.object({
+  email: z.email('Invalid email'),
+  password: z.string().min(8, 'Password must be at least 8 characters')
+})
+
+type Schema = z.output<typeof schema>
+
 const state = reactive({
   email: '',
   password: '',
   remember: false
 })
+
+const toast = useToast()
+const isLoading = ref(false)
+
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+  if (isLoading.value) {
+    return
+  }
+
+  isLoading.value = true
+
+  try {
+    await $fetch('/api/auth/login', {
+      method: 'POST',
+      body: event.data
+    })
+
+    toast.add({
+      title: 'Success',
+      description: 'Welcome back!',
+      color: 'success'
+    })
+
+    await navigateTo('/')
+  }
+  catch (err: any) {
+    toast.add({
+      title: 'Error',
+      description: err.data?.message || 'Invalid credentials',
+      color: 'error'
+    })
+  }
+  finally {
+    isLoading.value = false
+  }
+}
 </script>
 
 <template>
@@ -16,7 +62,7 @@ const state = reactive({
 
       <USeparator />
 
-      <UForm :state="state" class="space-y-6">
+      <UForm :schema="schema" :state="state" class="space-y-6" @submit="onSubmit">
         <UFormField label="Email" name="email">
           <UInput v-model="state.email" placeholder="jane@example.com" class="w-full" />
         </UFormField>
@@ -27,7 +73,9 @@ const state = reactive({
 
         <UCheckbox v-model="state.remember" label="Remember me" />
 
-        <UButton type="submit" block size="lg">Log In</UButton>
+        <UButton type="submit" :loading="isLoading" :disabled="isLoading" block size="lg">
+          Log In
+        </UButton>
       </UForm>
     </div>
   </div>
