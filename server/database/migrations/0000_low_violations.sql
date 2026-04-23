@@ -1,11 +1,12 @@
-CREATE TYPE "public"."categoryEnum" AS ENUM('Web Development', 'Software Development', 'Network Engineering', 'Cybersecurity', 'DevOps');--> statement-breakpoint
-CREATE TYPE "public"."countryEnum" AS ENUM('Luxembourg', 'France', 'Belgium', 'Germany');--> statement-breakpoint
-CREATE TYPE "public"."languageEnum" AS ENUM('English', 'German', 'French');--> statement-breakpoint
-CREATE TYPE "public"."offerStatusEnum" AS ENUM('Active', 'Paused', 'Deleted');--> statement-breakpoint
-CREATE TYPE "public"."orderStatusEnum" AS ENUM('Pending', 'Accepted', 'Rejected', 'Completed', 'Cancelled');--> statement-breakpoint
-CREATE TYPE "public"."roleEnum" AS ENUM('Freelancer', 'Company', 'Admin');--> statement-breakpoint
-CREATE TYPE "public"."skillsEnum" AS ENUM('C', 'C#', 'C++', 'Go', 'Java', 'JavaScript', 'PHP', 'Python', 'Rust', 'TypeScript');--> statement-breakpoint
-CREATE TYPE "public"."workPlaceEnum" AS ENUM('On site', 'Remote', 'Hybrid');--> statement-breakpoint
+CREATE TYPE "public"."accountTypeEnum" AS ENUM('freelancer', 'company');--> statement-breakpoint
+CREATE TYPE "public"."categoryEnum" AS ENUM('web_development', 'software_development', 'network_engineering', 'cybersecurity', 'devops');--> statement-breakpoint
+CREATE TYPE "public"."countryEnum" AS ENUM('be', 'de', 'fr', 'lu');--> statement-breakpoint
+CREATE TYPE "public"."languageEnum" AS ENUM('en', 'de', 'fr', 'lu');--> statement-breakpoint
+CREATE TYPE "public"."offerStatusEnum" AS ENUM('active', 'paused', 'deleted');--> statement-breakpoint
+CREATE TYPE "public"."orderStatusEnum" AS ENUM('pending', 'accepted', 'rejected', 'completed', 'cancelled');--> statement-breakpoint
+CREATE TYPE "public"."roleTypeEnum" AS ENUM('user', 'admin');--> statement-breakpoint
+CREATE TYPE "public"."skillsEnum" AS ENUM('c', 'csharp', 'cpp', 'go', 'java', 'javascript', 'php', 'python', 'rust', 'typescript');--> statement-breakpoint
+CREATE TYPE "public"."workPlaceEnum" AS ENUM('on_site', 'remote', 'hybrid');--> statement-breakpoint
 CREATE TABLE "offers" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
@@ -17,7 +18,7 @@ CREATE TABLE "offers" (
 	"duration" integer DEFAULT 1 NOT NULL,
 	"work_place" "workPlaceEnum" NOT NULL,
 	"location" "countryEnum" NOT NULL,
-	"status" "offerStatusEnum" DEFAULT 'Active' NOT NULL,
+	"status" "offerStatusEnum" DEFAULT 'active' NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
@@ -28,7 +29,7 @@ CREATE TABLE "orders" (
 	"buyer_id" integer NOT NULL,
 	"seller_id" integer NOT NULL,
 	"price" real NOT NULL,
-	"status" "orderStatusEnum" DEFAULT 'Pending' NOT NULL,
+	"status" "orderStatusEnum" DEFAULT 'pending' NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
@@ -52,7 +53,8 @@ CREATE TABLE "users" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"email" text NOT NULL,
 	"password" text NOT NULL,
-	"role" "roleEnum" NOT NULL,
+	"account_type" "accountTypeEnum" NOT NULL,
+	"role_type" "roleTypeEnum" NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "users_email_unique" UNIQUE("email")

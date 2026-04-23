@@ -1,5 +1,5 @@
 {
-  "id": "8d1c4cee-43be-426b-8904-5cee0028b4a1",
+  "id": "1e0631aa-d357-49b3-a82b-dca3fb214d05",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -79,7 +79,7 @@
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'Active'"
+          "default": "'active'"
         },
         "created_at": {
           "name": "created_at",
@@ -158,7 +158,7 @@
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'Pending'"
+          "default": "'pending'"
         },
         "created_at": {
           "name": "created_at",
@@ -350,9 +350,16 @@
           "primaryKey": false,
           "notNull": true
         },
-        "role": {
-          "name": "role",
-          "type": "roleEnum",
+        "account_type": {
+          "name": "account_type",
+          "type": "accountTypeEnum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role_type": {
+          "name": "role_type",
+          "type": "roleTypeEnum",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
@@ -390,88 +397,96 @@
     }
   },
   "enums": {
+    "public.accountTypeEnum": {
+      "name": "accountTypeEnum",
+      "schema": "public",
+      "values": [
+        "freelancer",
+        "company"
+      ]
+    },
     "public.categoryEnum": {
       "name": "categoryEnum",
       "schema": "public",
       "values": [
-        "Web Development",
-        "Software Development",
-        "Network Engineering",
-        "Cybersecurity",
-        "DevOps"
+        "web_development",
+        "software_development",
+        "network_engineering",
+        "cybersecurity",
+        "devops"
       ]
     },
     "public.countryEnum": {
       "name": "countryEnum",
       "schema": "public",
       "values": [
-        "Luxembourg",
-        "France",
-        "Belgium",
-        "Germany"
+        "be",
+        "de",
+        "fr",
+        "lu"
       ]
     },
     "public.languageEnum": {
       "name": "languageEnum",
       "schema": "public",
       "values": [
-        "English",
-        "German",
-        "French"
+        "en",
+        "de",
+        "fr",
+        "lu"
       ]
     },
     "public.offerStatusEnum": {
       "name": "offerStatusEnum",
       "schema": "public",
       "values": [
-        "Active",
-        "Paused",
-        "Deleted"
+        "active",
+        "paused",
+        "deleted"
       ]
     },
     "public.orderStatusEnum": {
       "name": "orderStatusEnum",
       "schema": "public",
       "values": [
-        "Pending",
-        "Accepted",
-        "Rejected",
-        "Completed",
-        "Cancelled"
+        "pending",
+        "accepted",
+        "rejected",
+        "completed",
+        "cancelled"
       ]
     },
-    "public.roleEnum": {
-      "name": "roleEnum",
+    "public.roleTypeEnum": {
+      "name": "roleTypeEnum",
       "schema": "public",
       "values": [
-        "Freelancer",
-        "Company",
-        "Admin"
+        "user",
+        "admin"
       ]
     },
     "public.skillsEnum": {
       "name": "skillsEnum",
       "schema": "public",
       "values": [
-        "C",
-        "C#",
-        "C++",
-        "Go",
-        "Java",
-        "JavaScript",
-        "PHP",
-        "Python",
-        "Rust",
-        "TypeScript"
+        "c",
+        "csharp",
+        "cpp",
+        "go",
+        "java",
+        "javascript",
+        "php",
+        "python",
+        "rust",
+        "typescript"
       ]
     },
     "public.workPlaceEnum": {
       "name": "workPlaceEnum",
       "schema": "public",
       "values": [
-        "On site",
-        "Remote",
-        "Hybrid"
+        "on_site",
+        "remote",
+        "hybrid"
       ]
     }
   },

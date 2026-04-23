@@ -1,6 +1,7 @@
 import { pgTable, serial, text, pgEnum, timestamp, integer, real } from 'drizzle-orm/pg-core'
 
 import {
+  ROLE_TYPE_VALUES,
   ACCOUNT_TYPE_VALUES,
   COUNTRY_VALUES,
   WORKPLACE_VALUES,
@@ -11,7 +12,9 @@ import {
   SKILLS_VALUES
 } from '#shared/constants/enums'
 
-export const roleEnum = pgEnum('roleEnum', ACCOUNT_TYPE_VALUES)
+export const roleTypeEnum = pgEnum('roleTypeEnum', ROLE_TYPE_VALUES)
+
+export const accountTypeEnum = pgEnum('accountTypeEnum', ACCOUNT_TYPE_VALUES)
 
 export const countryEnum = pgEnum('countryEnum', COUNTRY_VALUES)
 
@@ -31,7 +34,8 @@ export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   email: text('email').notNull().unique(),
   password: text('password').notNull(),
-  role: roleEnum('role').notNull(),
+  accountType: accountTypeEnum('account_type').notNull(),
+  roleType: roleTypeEnum('role_type').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull()
 })
@@ -61,7 +65,7 @@ export const offers = pgTable('offers', {
   duration: integer('duration').default(1).notNull(),
   workPlace: workPlaceEnum('work_place').notNull(),
   location: countryEnum('location').notNull(),
-  status: offerStatusEnum('status').default('Active').notNull(),
+  status: offerStatusEnum('status').default('active').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull()
 })
@@ -72,7 +76,7 @@ export const orders = pgTable('orders', {
   buyerId: integer('buyer_id').notNull().references(() => users.id),
   sellerId: integer('seller_id').notNull().references(() => users.id),
   price: real('price').notNull(),
-  status: orderStatusEnum('status').default('Pending').notNull(),
+  status: orderStatusEnum('status').default('pending').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull()
 })

@@ -3,6 +3,7 @@ import type { RegisterDTO } from '#shared/dto/register.dto'
 import { registerSchema } from '#shared/dto/register.dto'
 
 import type { FormSubmitEvent, RadioGroupItem, SelectMenuItem } from '@nuxt/ui'
+import { ACCOUNT_TYPE_VALUES, COUNTRY_VALUES } from '#shared/constants/enums'
 
 // Good read: https://ui.nuxt.com/docs/components/form
 
@@ -16,10 +17,20 @@ const state = reactive<Partial<RegisterDTO>>({
   country: undefined
 })
 
-const accountTypes: RadioGroupItem[] = [
-  { label: 'Freelancer', description: 'I am looking for a job opportunity.', id: 'freelancer' },
-  { label: 'Company', description: 'I am looking to hire someone.', id: 'company' }
-]
+const accountTypes: RadioGroupItem[]
+  = ACCOUNT_TYPE_VALUES.map(type => ({
+    label:
+      type === 'freelancer'
+        ? 'Freelancer'
+        : 'Company',
+
+    description:
+      type === 'freelancer'
+        ? 'I am looking for a job opportunity.'
+        : 'I am looking to hire someone.',
+
+    value: type
+  }))
 
 const countries: SelectMenuItem[] = [
   { label: 'Belgium', value: 'be' },
@@ -77,7 +88,11 @@ async function onSubmit(event: FormSubmitEvent<RegisterDTO>) {
 
       <UForm :schema="registerSchema" :state="state" class="space-y-6" @submit="onSubmit">
         <UFormField name="accountType">
-          <URadioGroup v-model="state.accountType" value-key="id" :items="accountTypes" />
+          <URadioGroup
+            v-model="state.accountType"
+            value-key="value"
+            :items="accountTypes"
+          />
         </UFormField>
 
         <div class="grid grid-cols-2 gap-4">
