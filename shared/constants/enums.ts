@@ -1,5 +1,7 @@
 export const ACCOUNT_TYPE_VALUES = ['freelancer', 'company'] as const
 
+export const ROLE_TYPE_VALUES = ['user', 'admin'] as const
+
 export const COUNTRY_VALUES = ['be', 'de', 'fr', 'lu'] as const
 
 export const WORKPLACE_VALUES = ['on_site', 'remote', 'hybrid'] as const

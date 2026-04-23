@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { LANGUAGE_VALUES, COUNTRY_VALUES, ACCOUNT_TYPE_VALUES } from '#shared/constants/enums'
+import { LANGUAGE_VALUES, COUNTRY_VALUES, ACCOUNT_TYPE_VALUES, ROLE_TYPE_VALUES } from '#shared/constants/enums'
 
 export const registerSchema = z.object({
   accountType: z.enum(ACCOUNT_TYPE_VALUES),
@@ -13,7 +13,7 @@ export const registerSchema = z.object({
   country: z.enum(COUNTRY_VALUES, 'Please select a country'),
 
   // Unused for now
-  houseNumber: z.int().optional(),
+  houseNumber: z.coerce.number().int().optional(),
   street: z.string().trim().min(1).optional(),
   zip: z.string().trim().min(1).optional(),
   language: z.enum(LANGUAGE_VALUES).optional()

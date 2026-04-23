@@ -20,7 +20,8 @@ export async function registerUser(db: any, tables: any, dto: RegisterDTO) {
       .values({
         email: dto.email,
         password: hashedPassword,
-        role: dto.role
+        accountType: dto.accountType,
+        roleType: 'user'
       })
       .returning()
 
