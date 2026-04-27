@@ -1,5 +1,5 @@
 {
-  "id": "1e0631aa-d357-49b3-a82b-dca3fb214d05",
+  "id": "1ebd0061-8e30-4e2e-b6dd-b9c882800918",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -357,9 +357,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "role_type": {
-          "name": "role_type",
-          "type": "roleTypeEnum",
+        "role": {
+          "name": "role",
+          "type": "roleEnum",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
@@ -409,11 +409,12 @@
       "name": "categoryEnum",
       "schema": "public",
       "values": [
-        "web_development",
-        "software_development",
-        "network_engineering",
         "cybersecurity",
-        "devops"
+        "devops",
+        "network_engineering",
+        "software_development",
+        "web_development",
+        "other"
       ]
     },
     "public.countryEnum": {
@@ -456,8 +457,8 @@
         "cancelled"
       ]
     },
-    "public.roleTypeEnum": {
-      "name": "roleTypeEnum",
+    "public.roleEnum": {
+      "name": "roleEnum",
       "schema": "public",
       "values": [
         "user",
@@ -471,7 +472,7 @@
         "c",
         "csharp",
         "cpp",
-        "go",
+        "golang",
         "java",
         "javascript",
         "php",

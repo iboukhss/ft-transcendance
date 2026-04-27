@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import type { LoginDTO } from '#shared/dto/login.dto'
 import type { FormSubmitEvent } from '@nuxt/ui'
+
+import type { LoginDTO } from '#shared/dto/login.dto'
 
 import { loginSchema } from '#shared/dto/login.dto'
 
@@ -27,7 +28,7 @@ async function onSubmit(event: FormSubmitEvent<LoginDTO>) {
     })
 
     toast.add({
-      title: 'Success',
+      title: 'Connected',
       description: 'Welcome back!',
       color: 'success'
     })

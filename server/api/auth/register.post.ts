@@ -1,8 +1,8 @@
+import { toUserDTO } from '#server/dto/user.dto'
 // server/api/auth/register.post.ts
 import { registerUser } from '#server/services/register.service'
-import { toUserDTO } from '#server/dto/user.dto'
-import { registerSchema } from '#shared/dto/register.dto'
 import { db, tables } from '#server/utils/db'
+import { registerSchema } from '#shared/dto/register.dto'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)

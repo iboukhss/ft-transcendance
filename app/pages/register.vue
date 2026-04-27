@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import type { RegisterDTO } from '#shared/dto/register.dto'
-import { registerSchema } from '#shared/dto/register.dto'
-
 import type { FormSubmitEvent, RadioGroupItem, SelectMenuItem } from '@nuxt/ui'
-import { ACCOUNT_TYPE_VALUES, COUNTRY_VALUES } from '#shared/constants/enums'
+
+import type { RegisterDTO } from '#shared/dto/register.dto'
+
+import { COUNTRY_KEYS, ACCOUNT_TYPE_KEYS } from '#shared/constants/enums'
+import { registerSchema } from '#shared/dto/register.dto'
+import { ACCOUNT_TYPE_INFO, COUNTRY_LABELS } from '~/utils/labels'
 
 // Good read: https://ui.nuxt.com/docs/components/form
 
@@ -17,27 +19,16 @@ const state = reactive<Partial<RegisterDTO>>({
   country: undefined
 })
 
-const accountTypes: RadioGroupItem[]
-  = ACCOUNT_TYPE_VALUES.map(type => ({
-    label:
-      type === 'freelancer'
-        ? 'Freelancer'
-        : 'Company',
+const accountOptions: RadioGroupItem[] = ACCOUNT_TYPE_KEYS.map(k => ({
+  id: k,
+  label: ACCOUNT_TYPE_INFO[k].label,
+  description: ACCOUNT_TYPE_INFO[k].description
+}))
 
-    description:
-      type === 'freelancer'
-        ? 'I am looking for a job opportunity.'
-        : 'I am looking to hire someone.',
-
-    value: type
-  }))
-
-const countries: SelectMenuItem[] = [
-  { label: 'Belgium', value: 'be' },
-  { label: 'France', value: 'fr' },
-  { label: 'Germany', value: 'de' },
-  { label: 'Luxembourg', value: 'lu' }
-]
+const countryOptions: SelectMenuItem[] = COUNTRY_KEYS.map(k => ({
+  key: k,
+  label: COUNTRY_LABELS[k]
+}))
 
 const toast = useToast()
 const isLoading = ref(false)
@@ -56,7 +47,7 @@ async function onSubmit(event: FormSubmitEvent<RegisterDTO>) {
     })
 
     toast.add({
-      title: 'Account Created',
+      title: 'Created',
       description: 'Welcome to LuxLink!',
       color: 'success'
     })
@@ -88,11 +79,7 @@ async function onSubmit(event: FormSubmitEvent<RegisterDTO>) {
 
       <UForm :schema="registerSchema" :state="state" class="space-y-6" @submit="onSubmit">
         <UFormField name="accountType">
-          <URadioGroup
-            v-model="state.accountType"
-            value-key="value"
-            :items="accountTypes"
-          />
+          <URadioGroup v-model="state.accountType" value-key="id" :items="accountOptions" />
         </UFormField>
 
         <div class="grid grid-cols-2 gap-4">
@@ -116,14 +103,14 @@ async function onSubmit(event: FormSubmitEvent<RegisterDTO>) {
         <UFormField label="Country" name="country">
           <USelectMenu
             v-model="state.country"
-            value-key="value"
+            value-key="key"
             placeholder="Select country"
-            :items="countries"
+            :items="countryOptions"
             :search-input="false"
             class="w-full" />
         </UFormField>
 
-        <UButton type="submit" :loading="isLoading" :disabled="isLoading" size="lg">
+        <UButton type="submit" block :loading="isLoading" :disabled="isLoading" size="lg">
           Create Account
         </UButton>
       </UForm>

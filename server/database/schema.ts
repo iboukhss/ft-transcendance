@@ -1,41 +1,41 @@
 import { pgTable, serial, text, pgEnum, timestamp, integer, real } from 'drizzle-orm/pg-core'
 
 import {
-  ROLE_TYPE_VALUES,
-  ACCOUNT_TYPE_VALUES,
-  COUNTRY_VALUES,
-  WORKPLACE_VALUES,
-  LANGUAGE_VALUES,
-  OFFER_STATUS_VALUES,
-  ORDER_STATUS_VALUES,
-  CATEGORY_VALUES,
-  SKILLS_VALUES
+  ROLE_KEYS,
+  ACCOUNT_TYPE_KEYS,
+  COUNTRY_KEYS,
+  WORKPLACE_KEYS,
+  LANGUAGE_KEYS,
+  OFFER_STATUS_KEYS,
+  ORDER_STATUS_KEYS,
+  JOB_CATEGORY_KEYS,
+  SKILL_KEYS
 } from '#shared/constants/enums'
 
-export const roleTypeEnum = pgEnum('roleTypeEnum', ROLE_TYPE_VALUES)
+export const roleEnum = pgEnum('roleEnum', ROLE_KEYS)
 
-export const accountTypeEnum = pgEnum('accountTypeEnum', ACCOUNT_TYPE_VALUES)
+export const accountTypeEnum = pgEnum('accountTypeEnum', ACCOUNT_TYPE_KEYS)
 
-export const countryEnum = pgEnum('countryEnum', COUNTRY_VALUES)
+export const countryEnum = pgEnum('countryEnum', COUNTRY_KEYS)
 
-export const workPlaceEnum = pgEnum('workPlaceEnum', WORKPLACE_VALUES)
+export const workPlaceEnum = pgEnum('workPlaceEnum', WORKPLACE_KEYS)
 
-export const languageEnum = pgEnum('languageEnum', LANGUAGE_VALUES)
+export const languageEnum = pgEnum('languageEnum', LANGUAGE_KEYS)
 
-export const offerStatusEnum = pgEnum('offerStatusEnum', OFFER_STATUS_VALUES)
+export const offerStatusEnum = pgEnum('offerStatusEnum', OFFER_STATUS_KEYS)
 
-export const orderStatusEnum = pgEnum('orderStatusEnum', ORDER_STATUS_VALUES)
+export const orderStatusEnum = pgEnum('orderStatusEnum', ORDER_STATUS_KEYS)
 
-export const categoryEnum = pgEnum('categoryEnum', CATEGORY_VALUES)
+export const categoryEnum = pgEnum('categoryEnum', JOB_CATEGORY_KEYS)
 
-export const skillsEnum = pgEnum('skillsEnum', SKILLS_VALUES)
+export const skillsEnum = pgEnum('skillsEnum', SKILL_KEYS)
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   email: text('email').notNull().unique(),
   password: text('password').notNull(),
   accountType: accountTypeEnum('account_type').notNull(),
-  roleType: roleTypeEnum('role_type').notNull(),
+  role: roleEnum('role').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull()
 })

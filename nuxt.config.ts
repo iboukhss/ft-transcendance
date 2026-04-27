@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint', 'nuxt-auth-utils', '@nuxt/ui'],
+  imports: {
+    scan: false
+  },
   devtools: { enabled: true },
   // From here: https://ui.nuxt.com/docs/getting-started/installation/nuxt
   css: ['~/assets/css/main.css'],

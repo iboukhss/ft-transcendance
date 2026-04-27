@@ -1,6 +1,5 @@
-import { db, tables } from '#server/utils/db'
-
 import { loginUser } from '#server/services/login.service'
+import { db, tables } from '#server/utils/db'
 import { loginSchema } from '#shared/dto/login.dto'
 
 export default defineEventHandler(async (event) => {

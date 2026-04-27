@@ -1,4 +1,5 @@
 import { eq } from 'drizzle-orm'
+
 import { toUserDTO } from '#server/dto/user.dto'
 
 export async function loginUser(db: any, tables: any, email: string, password: string) {

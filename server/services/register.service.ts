@@ -1,5 +1,7 @@
 import { eq } from 'drizzle-orm'
+
 import type { RegisterDTO } from '#shared/dto/register.dto'
+
 import { toUserDTO } from '#server/dto/user.dto'
 
 export async function registerUser(db: any, tables: any, dto: RegisterDTO) {
@@ -21,7 +23,7 @@ export async function registerUser(db: any, tables: any, dto: RegisterDTO) {
         email: dto.email,
         password: hashedPassword,
         accountType: dto.accountType,
-        roleType: 'user'
+        role: 'user'
       })
       .returning()
 

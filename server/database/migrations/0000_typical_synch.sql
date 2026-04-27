@@ -1,11 +1,11 @@
 CREATE TYPE "public"."accountTypeEnum" AS ENUM('freelancer', 'company');--> statement-breakpoint
-CREATE TYPE "public"."categoryEnum" AS ENUM('web_development', 'software_development', 'network_engineering', 'cybersecurity', 'devops');--> statement-breakpoint
+CREATE TYPE "public"."categoryEnum" AS ENUM('cybersecurity', 'devops', 'network_engineering', 'software_development', 'web_development', 'other');--> statement-breakpoint
 CREATE TYPE "public"."countryEnum" AS ENUM('be', 'de', 'fr', 'lu');--> statement-breakpoint
 CREATE TYPE "public"."languageEnum" AS ENUM('en', 'de', 'fr', 'lu');--> statement-breakpoint
 CREATE TYPE "public"."offerStatusEnum" AS ENUM('active', 'paused', 'deleted');--> statement-breakpoint
 CREATE TYPE "public"."orderStatusEnum" AS ENUM('pending', 'accepted', 'rejected', 'completed', 'cancelled');--> statement-breakpoint
-CREATE TYPE "public"."roleTypeEnum" AS ENUM('user', 'admin');--> statement-breakpoint
-CREATE TYPE "public"."skillsEnum" AS ENUM('c', 'csharp', 'cpp', 'go', 'java', 'javascript', 'php', 'python', 'rust', 'typescript');--> statement-breakpoint
+CREATE TYPE "public"."roleEnum" AS ENUM('user', 'admin');--> statement-breakpoint
+CREATE TYPE "public"."skillsEnum" AS ENUM('c', 'csharp', 'cpp', 'golang', 'java', 'javascript', 'php', 'python', 'rust', 'typescript');--> statement-breakpoint
 CREATE TYPE "public"."workPlaceEnum" AS ENUM('on_site', 'remote', 'hybrid');--> statement-breakpoint
 CREATE TABLE "offers" (
 	"id" serial PRIMARY KEY NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE "users" (
 	"email" text NOT NULL,
 	"password" text NOT NULL,
 	"account_type" "accountTypeEnum" NOT NULL,
-	"role_type" "roleTypeEnum" NOT NULL,
+	"role" "roleEnum" NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "users_email_unique" UNIQUE("email")

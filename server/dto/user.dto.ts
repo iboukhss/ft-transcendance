@@ -1,4 +1,5 @@
 import type { InferSelectModel } from 'drizzle-orm'
+
 import type { users } from '#server/database/schema'
 
 type User = InferSelectModel<typeof users>
